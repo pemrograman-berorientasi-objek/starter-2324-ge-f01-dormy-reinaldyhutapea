@@ -3,6 +3,10 @@ package pbo.f01;
 import javax.persistence.*;
 import pbo.f01.model.*;
 import java.util.*;
+/**
+ * 12S22010 - Reinaldy Hutapea
+ * 12S22048 - Ira Wianda Sari Silalahi
+ */
 
 public class App {
     private static EntityManagerFactory factory;
