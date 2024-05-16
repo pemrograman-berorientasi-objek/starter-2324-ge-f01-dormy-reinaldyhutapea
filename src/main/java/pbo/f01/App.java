@@ -49,7 +49,6 @@ public class App {
         // Cek apakah mahasiswa dengan s_Id tersebut sudah ada
         Student existingStudent = entityManager.find(Student.class, s_Id);
         if (existingStudent != null) {
-            System.out.println("Student with this ID already exists.");
             return;
         }
 
@@ -78,7 +77,6 @@ public class App {
         Dorm dorm = entityManager.find(Dorm.class, d_name);
 
         if (student == null || dorm == null) {
-            System.out.println("Student or Dorm not found.");
             return;
         }
 
