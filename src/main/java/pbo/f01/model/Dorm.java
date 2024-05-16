@@ -3,7 +3,10 @@ package pbo.f01.model;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * 12S22010 - Reinaldy Hutapea
+ * 12S22048 - Ira Wianda Sari Silalahi
+ */
 @Entity
 @Table(name = "dorms")
 public class Dorm {
