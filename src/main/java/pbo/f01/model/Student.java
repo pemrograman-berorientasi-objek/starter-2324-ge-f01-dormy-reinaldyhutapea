@@ -3,6 +3,7 @@ package pbo.f01.model;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
 /**
  * 12S22010 - Reinaldy Hutapea
  * 12S22048 - Ira Wianda Sari Silalahi
@@ -24,14 +25,11 @@ public class Student {
     private String s_gender;
 
     @ManyToMany
-    @JoinTable(
-        name = "student_dorm",
-        joinColumns = @JoinColumn(name = "s_Id", referencedColumnName = "s_Id"),
-        inverseJoinColumns = @JoinColumn(name = "d_name", referencedColumnName = "d_name")
-    )
+    @JoinTable(name = "student_dorm", joinColumns = @JoinColumn(name = "s_Id", referencedColumnName = "s_Id"), inverseJoinColumns = @JoinColumn(name = "d_name", referencedColumnName = "d_name"))
     private Set<Dorm> dorms = new HashSet<>();
 
-    public Student() {}
+    public Student() {
+    }
 
     public Student(String s_Id, String s_name, String s_entranceYear, String s_gender) {
         this.s_Id = s_Id;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import javax.persistence.*;
+
 /**
  * 12S22010 - Reinaldy Hutapea
  * 12S22048 - Ira Wianda Sari Silalahi
@@ -12,17 +13,16 @@ import javax.persistence.*;
 public class Executor {
     private EntityManager entityManager;
 
-    public Executor(EntityManager em){
+    public Executor(EntityManager em) {
         this.entityManager = em;
     }
 
-      public void studentAdd(String[] tokens) {
+    public void studentAdd(String[] tokens) {
         String s_Id = tokens[1];
         String s_name = tokens[2];
         String s_entranceYear = tokens[3];
         String s_gender = tokens[4];
 
-        // Cek apakah mahasiswa dengan s_Id tersebut sudah ada
         Student existingStudent = entityManager.find(Student.class, s_Id);
         if (existingStudent != null) {
             return;
@@ -56,7 +56,6 @@ public class Executor {
             return;
         }
 
-        // Kondisi untuk memastikan gender student sesuai dengan gender dorm
         if (!student.getS_gender().equals(dorm.getD_gender())) {
             return;
         }
@@ -72,7 +71,8 @@ public class Executor {
     }
 
     public void displayAll() {
-        List<Dorm> dorms = entityManager.createQuery("SELECT d FROM Dorm d ORDER BY d.d_name", Dorm.class).getResultList();
+        List<Dorm> dorms = entityManager.createQuery("SELECT d FROM Dorm d ORDER BY d.d_name", Dorm.class)
+                .getResultList();
 
         for (Dorm dorm : dorms) {
             System.out.println(dorm);
@@ -92,6 +92,6 @@ public class Executor {
         entityManager.createQuery("DELETE FROM Dorm").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
-        
+
     }
 }

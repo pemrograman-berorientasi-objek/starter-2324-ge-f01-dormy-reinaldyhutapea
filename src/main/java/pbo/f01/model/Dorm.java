@@ -3,6 +3,7 @@ package pbo.f01.model;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
 /**
  * 12S22010 - Reinaldy Hutapea
  * 12S22048 - Ira Wianda Sari Silalahi
@@ -23,7 +24,8 @@ public class Dorm {
     @ManyToMany(mappedBy = "dorms")
     private Set<Student> students = new HashSet<>();
 
-    public Dorm() {}
+    public Dorm() {
+    }
 
     public Dorm(String d_name, int d_capacity, String d_gender) {
         this.d_name = d_name;
