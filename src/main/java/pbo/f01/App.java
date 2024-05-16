@@ -3,10 +3,6 @@ package pbo.f01;
 import javax.persistence.*;
 import pbo.f01.model.*;
 import java.util.*;
-/**
- * 12S22010 - Reinaldy Hutapea
- * 12S22048 - Ira Wianda Sari Silalahi
- */
 
 public class App {
     private static EntityManagerFactory factory;
@@ -50,6 +46,13 @@ public class App {
         String s_entranceYear = tokens[3];
         String s_gender = tokens[4];
 
+        // Cek apakah mahasiswa dengan s_Id tersebut sudah ada
+        Student existingStudent = entityManager.find(Student.class, s_Id);
+        if (existingStudent != null) {
+            System.out.println("Student with this ID already exists.");
+            return;
+        }
+
         entityManager.getTransaction().begin();
         Student student = new Student(s_Id, s_name, s_entranceYear, s_gender);
         entityManager.persist(student);
@@ -79,13 +82,12 @@ public class App {
             return;
         }
 
+        // Kondisi untuk memastikan gender student sesuai dengan gender dorm
         if (!student.getS_gender().equals(dorm.getD_gender())) {
-            System.out.println("Gender mismatch.");
             return;
         }
 
         if (dorm.getStudents().size() >= dorm.getD_capacity()) {
-            System.out.println("Dorm is full.");
             return;
         }
 
