@@ -1,21 +1,13 @@
 package pbo.f01.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "STUDENT")
+@Table(name = "students")
 public class Student {
     @Id
-    @GeneratedValue
     @Column(name = "s_Id", nullable = false, length = 40)
     private String s_Id;
 
@@ -30,15 +22,13 @@ public class Student {
 
     @ManyToMany
     @JoinTable(
-            name = "ASSIGNMENT",
-            joinColumns = @JoinColumn(name = "s_Id"),
-            inverseJoinColumns = @JoinColumn(name = "d_name")
+        name = "student_dorm",
+        joinColumns = @JoinColumn(name = "s_Id", referencedColumnName = "s_Id"),
+        inverseJoinColumns = @JoinColumn(name = "d_name", referencedColumnName = "d_name")
     )
     private Set<Dorm> dorms = new HashSet<>();
 
-    public Student() {
-        // Konstruktor default
-    }
+    public Student() {}
 
     public Student(String s_Id, String s_name, String s_entranceYear, String s_gender) {
         this.s_Id = s_Id;
@@ -78,7 +68,6 @@ public class Student {
     public void setS_gender(String s_gender) {
         this.s_gender = s_gender;
     }
-    
 
     public Set<Dorm> getDorms() {
         return dorms;
@@ -90,6 +79,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return s_Id + "|" + s_name + "|" + s_entranceYear + s_gender;
+        return s_Id + "|" + s_name + "|" + s_entranceYear;
     }
 }
